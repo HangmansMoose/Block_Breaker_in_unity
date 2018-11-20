@@ -9,6 +9,7 @@ public class SceneLoader : MonoBehaviour {
 
 	public void LoadNextScene()
     {
+        //find current active scene and increment it
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
