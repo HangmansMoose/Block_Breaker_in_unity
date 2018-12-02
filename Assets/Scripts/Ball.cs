@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour {
+public class Ball : MonoBehaviour 
+{
 
 	[SerializeField] Paddle paddle;
 	[SerializeField] float xInitVelocity = 2f;
 	[SerializeField] float yInitVelocity = 15f;
+	[SerializeField] AudioClip[] ballSounds;
 	
 	Vector2 paddleBallDelta;
 	bool hasStarted = false;
@@ -25,7 +27,7 @@ public class Ball : MonoBehaviour {
 		{
 			BallLockStart();
 			ClickLaunch();
-
+			
 		}
 					
 	}
@@ -44,6 +46,16 @@ public class Ball : MonoBehaviour {
 			//Give the ball a velocity on click
 			GetComponent<Rigidbody2D>().velocity = new Vector2(xInitVelocity, yInitVelocity);
 			hasStarted = true;
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if(hasStarted)
+		{
+			//Randomly select one of the sounds to play each collision
+			AudioClip clip = ballSounds[Random.Range(0, ballSounds.Length)];
+			GetComponent<AudioSource>().PlayOneShot(clip);
 		}
 	}
 }
