@@ -15,7 +15,6 @@ public class Ball : MonoBehaviour {
 	void Start () 
 	{
 		paddleBallDelta = transform.position - paddle.transform.position;	
-			
 		
 	}
 	
